@@ -16,6 +16,42 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
+            <flux:navlist.group heading="Modulos" expandable>
+
+                <flux:navlist.item
+                    icon="cube"
+                    :href="route('modules.services.index')"
+                    :current="request()->routeIs('modules.services.index')"
+                    wire:navigate
+                >
+                    Servicios
+                </flux:navlist.item>
+                <flux:navlist.item
+                    icon="users"
+                    :href="route('modules.clients.index')"
+                    :current="request()->routeIs('modules.clients.index')"
+                    wire:navigate
+                >
+                    Clientes
+                </flux:navlist.item>
+                <flux:navlist.item
+                    icon="identification"
+                    :href="route('modules.suppliers.index')"
+                    :current="request()->routeIs('modules.suppliers.index')"
+                    wire:navigate
+                >
+                    Proveedores
+                </flux:navlist.item>
+                <flux:navlist.item
+                    icon="arrows-right-left"
+                    :href="route('modules.interactions.index')"
+                    :current="request()->routeIs('modules.interactions.index')"
+                    wire:navigate
+                >
+                    Interacción
+                </flux:navlist.item>
+
+            </flux:navlist.group>
 
             <flux:spacer />
 
