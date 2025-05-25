@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="document_type" class="form-label
                 @error('document_type') is-invalid @enderror">
-                Categoría
+                Tipo de documento
             </label>
             <select class="form-select" id="document_type"
                     wire:model="form.document_type">

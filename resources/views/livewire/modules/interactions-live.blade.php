@@ -1,3 +1,308 @@
 <div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
+    @if($iscreate || $isEdit)
+        <form class="grid grid-cols-4 gap-3" wire:submit="saveInteraction">
+            <div class="form-group">
+                <label for="client_id" class="form-label
+                @error('client_id') is-invalid @enderror">
+                    Cliente
+                </label>
+                <select class="form-select" id="client_id"
+                        wire:model="form.client_id">
+                    <option value="">Seleccione un cliente</option>
+                    @foreach($ddl_clients as $key => $client)
+                        <option value="{{ $key }}">{{ $client }}</option>
+                    @endforeach
+                </select>
+                @error('form.client_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="service_id" class="form-label
+                @error('service_id') is-invalid @enderror">
+                    Servicios
+                </label>
+                <select class="form-select" id="service_id"
+                        wire:model="form.service_id">
+                    <option value="">Seleccione un servicio</option>
+                    @foreach($ddl_services as $key => $service)
+                        <option value="{{ $key }}">{{ $service }}</option>
+                    @endforeach
+                </select>
+                @error('form.service_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="quantity" class="form-label
+                @error('quantity') is-invalid @enderror">
+                    Cantidad
+                </label>
+                <input type="number" class="form-text" id="quantity"
+                       wire:model="form.quantity" placeholder="Cantidad" min="1" step="0.1">
+                @error('form.quantity')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="cost_price" class="form-label
+                @error('cost_price') is-invalid @enderror">
+                    Precio de costo
+                </label>
+                <input type="number" class="form-text" id="cost_price"
+                       wire:model="form.cost_price" placeholder="Precio de costo" min="1" step="0.1">
+                @error('form.cost_price')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="selling_price" class="form-label
+                @error('selling_price') is-invalid @enderror">
+                    Precio de venta
+                </label>
+                <input type="number" class="form-text" id="selling_price"
+                       wire:model="form.selling_price" placeholder="Precio de venta" min="1" step="0.1">
+                @error('form.selling_price')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="gross_profit" class="form-label
+                @error('gross_profit') is-invalid @enderror">
+                    Ganancia
+                </label>
+                <input type="number" class="form-text" id="gross_profit"
+                       wire:model="form.gross_profit" placeholder="Ganancia" min="1" step="0.1">
+                @error('form.gross_profit')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="expiration_date" class="form-label
+                @error('expiration_date') is-invalid @enderror">
+                    Fecha de expiración
+                </label>
+                <input type="date" class="form-text" id="expiration_date"
+                       wire:model="form.expiration_date" placeholder="Fecha de expiración" min="1" step="0.1">
+                @error('form.expiration_date')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="next_action_date" class="form-label
+                @error('next_action_date') is-invalid @enderror">
+                    Fecha de siguiente acción
+                </label>
+                <input type="date" class="form-text" id="next_action_date"
+                       wire:model="form.next_action_date" placeholder="Fecha de siguiente acción" min="1" step="0.1">
+                @error('form.next_action_date')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="notified_at" class="form-label
+                @error('notified_at') is-invalid @enderror">
+                    Fecha de notificación
+                </label>
+                <input type="date" class="form-text" id="notified_at"
+                       wire:model="form.notified_at" placeholder="Fecha de notificación" min="1" step="0.1">
+                @error('form.notified_at')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="active" class="form-label mb-2 inline-block">Notificar por Whatsapp</label>
+                <div class="flex items-center">
+                    <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" id="active" wire:model="form.notify_by_whatsapp"
+                               class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
+                        <label for="notify_by_whatsapp"
+                               class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="ml-2 text-sm">
+                    {{ $form->notify_by_whatsapp  ? 'Activo' : 'Inactivo' }}
+                </span>
+                </div>
+                @error('form.notify_by_whatsapp')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="active" class="form-label mb-2 inline-block">Notificar por email</label>
+                <div class="flex items-center">
+                    <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" id="active" wire:model="form.notify_by_email"
+                               class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
+                        <label for="notify_by_email"
+                               class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="ml-2 text-sm">
+                    {{ $form->notify_by_email  ? 'Activo' : 'Inactivo' }}
+                </span>
+                </div>
+                @error('form.notify_by_email')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="type" class="form-label
+                @error('type') is-invalid @enderror">
+                    Tipo de interacción
+                </label>
+                <select class="form-select" id="type"
+                        wire:model="form.type">
+                    <option value="">Seleccione un tipo de interacción</option>
+                    @foreach($ddl_interaction_types as $key => $ddl_interaction_type)
+                        <option value="{{ $key }}">{{ $ddl_interaction_type }}</option>
+                    @endforeach
+                </select>
+                @error('form.type')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group col-span-2">
+                <label for="note" class="form-label
+                @error('note') is-invalid @enderror">
+                    Notas
+                </label>
+                <textarea class="form-text" id="note"
+                          wire:model="form.note" placeholder="Notas"></textarea>
+                @error('form.note')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="pt-12">
+                <button type="submit" class="btn-primary">
+                    @if($isEdit)
+                        Actualizar
+                    @else
+                        Guardar
+                    @endif
+                </button>
+                <button type="button" wire:click="cancelEdit" class="btn-secondary">
+                    Cancelar
+                </button>
+
+            </div>
+
+        </form>
+    @else
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold"></h2>
+            <button wire:click="$set('iscreate', '1')" class="btn-primary">
+                Crear nueva interacción
+            </button>
+        </div>
+    @endif
+
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Servicio</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Venta</th>
+                <th>Ganancia</th>
+                <th>Fecha de expiración</th>
+                <th>Fecha de siguiente acción</th>
+                <th>Notificado</th>
+                <th>Notificar por whatsapp</th>
+                <th>Notificar por email</th>
+                <th>Tipo</th>
+                <th>Notas</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($interactions as $interaction)
+                <tr>
+                    <td>{{ $interaction->client->name }}</td>
+                    <td>{{ $interaction->service->name }}</td>
+                    <td>{{ $interaction->quantity }}</td>
+                    <td>{{ $interaction->cost_price }}</td>
+                    <td>{{ $interaction->selling_price }}</td>
+                    <td>{{ $interaction->gross_profit }}</td>
+                    <td>{{ $interaction->expiration_date }}</td>
+                    <td>{{ $interaction->next_action_date }}</td>
+                    <td>{{ $interaction->notified_at }}</td>
+                    <td>
+                        <input type="checkbox" disabled
+                               @if($interaction->notify_by_whatsapp) checked @endif>
+                    </td>
+                    <td>
+                        <input type="checkbox" disabled
+                               @if($interaction->notify_by_email) checked @endif>
+                    </td>
+                    <td>{{ $interaction->type }}</td>
+                    <td>{{ $interaction->note }}</td>
+
+                    <td>
+                        <button wire:click="editInteraction({{ $interaction->id }})" class="btn-secondary my-1">
+                            Editar
+                        </button>
+                        <button @click="$dispatch('alert-delete',{{$interaction->id}})" class="btn-danger my-1">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <div class="pagination">
+            {{ $interactions->links() }}
+        </div>
+    </div>
 </div>
+@script
+<script>
+    $wire.on('alert-delete', (interaction_id) => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.deleteInteraction(interaction_id);
+                Swal.fire(
+                    'Eliminado!',
+                    'El cliente ha sido eliminado.',
+                    'success'
+                )
+            }
+        })
+    });
+</script>
+@endscript

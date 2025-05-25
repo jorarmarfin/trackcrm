@@ -50,6 +50,14 @@
                 >
                     Interacción
                 </flux:navlist.item>
+                <flux:navlist.item
+                    icon="cog-8-tooth"
+                    :href="route('admin.settings.index')"
+                    :current="request()->routeIs('admin.settings.index')"
+                    wire:navigate
+                >
+                    Configuración
+                </flux:navlist.item>
 
             </flux:navlist.group>
 

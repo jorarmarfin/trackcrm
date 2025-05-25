@@ -85,9 +85,19 @@ class ServicesSeeder extends Seeder
                 'price' => 150.00,
             ],
             [
+                'name' => 'Dominio y Hosting',
+                'description' => 'Requiere dominio para envío',
+                'price' => 150.00,
+            ],
+            [
                 'name' => 'VPS Hosting',
                 'description' => 'Requiere dominio para envío',
                 'price' => 180.00,
+            ],
+            [
+                'name' => 'Email',
+                'description' => '5GB de almacenamiento',
+                'price' => 10.00,
             ],
 
         ]);

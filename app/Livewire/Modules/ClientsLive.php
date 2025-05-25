@@ -26,15 +26,15 @@ class ClientsLive extends Component
     {
         if($this->isEdit){
             $this->form->update($this->getClient($this->client_id));
-            $title = 'Categoría actualizada';
+            $title = 'Cliente actualizado';
             $icon = 'success';
-            $message = 'Categoría actualizada correctamente';
+            $message = 'Cliente actualizado correctamente';
             $this->isEdit = false;
         }else{
             $this->form->store();
-            $title = 'Categoría guardada';
+            $title = 'Cliente guardado';
             $icon = 'success';
-            $message = 'Categoría guardada correctamente';
+            $message = 'Cliente guardado correctamente';
         }
         $this->dispatch('alert', [
             'title' => $title,

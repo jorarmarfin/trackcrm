@@ -13,7 +13,5 @@ Route::middleware('auth')
         Route::view('/clients', 'modules.clients.index')->name('clients.index');
         Route::view('/suppliers', 'modules.suppliers.index')->name('suppliers.index');
         Route::view('/interactions', 'modules.interactions.index')->name('interactions.index');
-
-
 });
 

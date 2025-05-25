@@ -20,7 +20,7 @@ class ClientForm extends Form
     public string $email = '';
     #[Validate('required')]
     public string $address = '';
-    #[Validate('required')]
+
     public string $notes = '';
     #[Validate('required')]
     public string $status = 'activo'; // true = activo

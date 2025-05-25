@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Interaction extends Model
 {
+    protected $guarded = [];
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);

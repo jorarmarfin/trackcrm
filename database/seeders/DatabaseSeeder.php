@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ServicesSeeder::class,
             SuppliersSeeder::class,
+            SettingsSeeder::class,
         ]);
     }
 }
