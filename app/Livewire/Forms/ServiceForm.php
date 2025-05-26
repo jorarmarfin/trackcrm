@@ -14,9 +14,11 @@ class ServiceForm extends Form
     public string $description = '';
     #[Validate('required')]
     public float $price = 0.0;
+    #[Validate('required|numeric|min:0')]
+    public ?int $supplier_id = 0;
 
 
-    public array $fields = ['name', 'description', 'price'];
+    public array $fields = ['name', 'description', 'price', 'supplier_id'];
 
     public function store()
     {
@@ -33,6 +35,7 @@ class ServiceForm extends Form
             'name' => $service->name,
             'description' => $service->description,
             'price' => $service->price,
+            'supplier_id' => $service->supplier_id,
         ]);
     }
     public function update(Service $service): void

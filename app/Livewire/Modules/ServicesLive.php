@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modules;
 
+use App\Http\Traits\DdlTrait;
 use App\Http\Traits\ServicesTrait;
 use App\Livewire\Forms\ServiceForm;
 use Livewire\Component;
@@ -9,7 +10,7 @@ use Livewire\WithPagination;
 
 class ServicesLive extends Component
 {
-    use ServicesTrait, WithPagination;
+    use ServicesTrait, WithPagination,DdlTrait;
     public ServiceForm $form;
     public bool $isEdit = false;
     public int $supplier_id;
@@ -17,6 +18,7 @@ class ServicesLive extends Component
     {
         return view('livewire.modules.services-live',[
             'services' => $this->getServices()->paginate(50),
+            'ddl_suppliers' => $this->ddlSuppliers()
         ]);
     }
     public function saveService():void

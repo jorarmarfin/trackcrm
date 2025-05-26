@@ -4,13 +4,14 @@ namespace App\Livewire\Modules;
 
 use App\Http\Traits\InteractionsTrait;
 use App\Http\Traits\DdlTrait;
+use App\Http\Traits\ServicesTrait;
 use App\Livewire\Forms\InteractionForm;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class InteractionsLive extends Component
 {
-    use DdlTrait,InteractionsTrait,WithPagination;
+    use DdlTrait,InteractionsTrait,WithPagination,servicesTrait;
     public InteractionForm $form;
 
     public bool $isEdit = false;
@@ -61,4 +62,12 @@ class InteractionsLive extends Component
         $this->isEdit = false;
         $this->iscreate = false;
     }
+    public function updatedFormServiceId($value)
+    {
+        $service  = $this->getService($value);
+        $this->form->cost_price = $service->supplier?->price ?? 0.00;
+        $this->form->selling_price = $service->price;
+    }
+
+
 }

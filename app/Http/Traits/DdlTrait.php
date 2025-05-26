@@ -5,6 +5,8 @@ namespace App\Http\Traits;
 use App\Http\Enum\InteractionTypeEnum;
 use App\Models\Client;
 use App\Models\Service;
+use App\Models\Supplier;
+use Illuminate\Support\Facades\DB;
 
 trait DdlTrait
 {
@@ -14,7 +16,11 @@ trait DdlTrait
     }
     public function ddlServices()
     {
-        return $this->getDdl(Service::class, 'id', 'name');
+        return $this->getDdl(Service::class, 'id', DB::raw("CONCAT(name, ' | ', price) as name"));
+    }
+    public function ddlSuppliers()
+    {
+        return $this->getDdl(Supplier::class, 'id', DB::raw("CONCAT(name, ' | ', cost_price,' | ',notes) as name"));
     }
     public function ddlDocumentTypes():array
     {

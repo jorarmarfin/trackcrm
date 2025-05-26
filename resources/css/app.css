@@ -87,7 +87,7 @@ table td {
 }
 
 .table-container {
-    @apply overflow-x-auto rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-white/10;
+    @apply overflow-x-auto rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-white/10 mt-5;
 }
 
 .pagination{

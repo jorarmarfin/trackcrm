@@ -39,8 +39,26 @@
             </div>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="supplier_id" class="form-label
+                @error('supplier_id') is-invalid @enderror">
+                Proveedor
+            </label>
+            <select class="form-select" id="supplier_id"
+                    wire:model="form.supplier_id">
+                <option value="">Seleccione un proveedor</option>
+                @foreach($ddl_suppliers as $key => $supplier)
+                    <option value="{{ $key }}">{{ $supplier }}</option>
+                @endforeach
+            </select>
+            @error('form.supplier_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
 
-        <div class="pt-12">
+        <div class="">
             <button type="submit" class="btn-primary">
                 @if($isEdit)
                     Actualizar
@@ -57,7 +75,8 @@
             <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Estado</th>
+                <th>Precio venta</th>
+                <th>Proveedor</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -67,6 +86,7 @@
                     <td>{{ $service->name }}</td>
                     <td>{{ $service->description }}</td>
                     <td>{{ $service->price }}</td>
+                    <td>{{ $service->supplier?->notes }}</td>
                     <td>
                         <button wire:click="editService({{ $service->id }})" class="btn-secondary">
                             Editar

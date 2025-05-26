@@ -9,7 +9,8 @@ use Livewire\Form;
 class InteractionForm extends Form
 {
     #[Validate('required')]
-    public int $interaction_id = 0;
+    public int $client_id = 0;
+
     #[Validate('required')]
     public int $service_id = 0;
     public int $quantity = 0;

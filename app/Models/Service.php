@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
@@ -14,8 +14,8 @@ class Service extends Model
     {
         return $this->hasMany(Interaction::class);
     }
-    public function suppliers(): BelongsToMany
+    public function supplier(): BelongsTo
     {
-        return $this->belongsToMany(Supplier::class);
+        return $this->belongsTo(Supplier::class);
     }
 }

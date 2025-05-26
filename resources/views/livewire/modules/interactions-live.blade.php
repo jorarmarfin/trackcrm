@@ -8,7 +8,7 @@
                 </label>
                 <select class="form-select" id="client_id"
                         wire:model="form.client_id">
-                    <option value="">Seleccione un cliente</option>
+                    <option value="">Seleccione un Cliente</option>
                     @foreach($ddl_clients as $key => $client)
                         <option value="{{ $key }}">{{ $client }}</option>
                     @endforeach
@@ -25,7 +25,7 @@
                     Servicios
                 </label>
                 <select class="form-select" id="service_id"
-                        wire:model="form.service_id">
+                        wire:model.live="form.service_id">
                     <option value="">Seleccione un servicio</option>
                     @foreach($ddl_services as $key => $service)
                         <option value="{{ $key }}">{{ $service }}</option>
