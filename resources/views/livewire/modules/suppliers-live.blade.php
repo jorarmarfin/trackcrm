@@ -145,7 +145,7 @@
                     <td>{{ $supplier->phone }}</td>
                     <td>{{ $supplier->email }}</td>
                     <td>{{ $supplier->website }}</td>
-                    <td>{{ $supplier->cost_price }}</td>
+                    <td>{{$supplier->currency}} {{ $supplier->cost_price }}</td>
                     <td>{{ $supplier->notes }}</td>
                     <td>
                         <button wire:click="editSupplier({{ $supplier->id }})" class="btn-secondary">

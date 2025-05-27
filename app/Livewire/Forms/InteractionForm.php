@@ -27,7 +27,7 @@ class InteractionForm extends Form
     #[Validate('required')]
     public bool $notify_by_email = true;
     #[Validate('required')]
-    public string $type = ''; // expiración, cobro, renovación, recordatorio, agradecimiento, nota
+    public string $type = 'start'; // expiración, cobro, renovación, recordatorio, agradecimiento, nota
 
     public string $note = '';
 

@@ -13,6 +13,7 @@ class InteractionsLive extends Component
 {
     use DdlTrait,InteractionsTrait,WithPagination,servicesTrait;
     public InteractionForm $form;
+    public int $currentServiceId = 0;
 
     public bool $isEdit = false;
     public bool $iscreate = false;
@@ -64,9 +65,21 @@ class InteractionsLive extends Component
     }
     public function updatedFormServiceId($value)
     {
-        $service  = $this->getService($value);
-        $this->form->cost_price = $service->supplier?->price ?? 0.00;
-        $this->form->selling_price = $service->price;
+        $this->currentServiceId = $value;
+        $service  = $this->getService($this->currentServiceId);
+        $this->calculate($service,1);
+    }
+    public function updatedFormQuantity($value)
+    {
+        $service  = $this->getService($this->currentServiceId);
+        $this->calculate($service,$value);
+    }
+    public function calculate($service,$quantity)
+    {
+        $this->form->cost_price = ($service->supplier?->cost_price_to_soles ?? 0.00)*$quantity;
+        $this->form->selling_price = ($service->price)*$quantity;
+        $this->form->gross_profit = round($this->form->selling_price - $this->form->cost_price,2);
+
     }
 
 

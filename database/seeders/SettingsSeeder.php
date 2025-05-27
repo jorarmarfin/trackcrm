@@ -19,11 +19,11 @@ class SettingsSeeder extends Seeder
                 'value' => '0.18'
             ],
             [
-                'key' => 'tcd',
+                'key' => '$',
                 'value' => '3.8'
             ],
             [
-                'key' => 'tce',
+                'key' => '€',
                 'value' => '4.2'
             ],
         ]);

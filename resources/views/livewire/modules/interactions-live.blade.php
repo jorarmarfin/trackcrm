@@ -43,7 +43,7 @@
                     Cantidad
                 </label>
                 <input type="number" class="form-text" id="quantity"
-                       wire:model="form.quantity" placeholder="Cantidad" min="1" step="0.1">
+                       wire:model.live="form.quantity" placeholder="Cantidad" min="1" step="0.1">
                 @error('form.quantity')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -56,7 +56,7 @@
                     Precio de costo
                 </label>
                 <input type="number" class="form-text" id="cost_price"
-                       wire:model="form.cost_price" placeholder="Precio de costo" min="1" step="0.1">
+                       wire:model="form.cost_price" placeholder="Precio de costo" min="0" step="0.1">
                 @error('form.cost_price')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -129,10 +129,10 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="active" class="form-label mb-2 inline-block">Notificar por Whatsapp</label>
+                <label for="notify_by_whatsapp" class="form-label mb-2 inline-block">Notificar por Whatsapp</label>
                 <div class="flex items-center">
                     <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" id="active" wire:model="form.notify_by_whatsapp"
+                        <input type="checkbox" id="notify_by_whatsapp" wire:model="form.notify_by_whatsapp"
                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
                         <label for="notify_by_whatsapp"
                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -148,10 +148,10 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="active" class="form-label mb-2 inline-block">Notificar por email</label>
+                <label for="notify_by_email" class="form-label mb-2 inline-block">Notificar por email</label>
                 <div class="flex items-center">
                     <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" id="active" wire:model="form.notify_by_email"
+                        <input type="checkbox" id="notify_by_email" wire:model="form.notify_by_email"
                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
                         <label for="notify_by_email"
                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>

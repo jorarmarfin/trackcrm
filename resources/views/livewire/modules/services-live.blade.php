@@ -86,7 +86,7 @@
                     <td>{{ $service->name }}</td>
                     <td>{{ $service->description }}</td>
                     <td>{{ $service->price }}</td>
-                    <td>{{ $service->supplier?->notes }}</td>
+                    <td>{{ $service->supplier?->details }}</td>
                     <td>
                         <button wire:click="editService({{ $service->id }})" class="btn-secondary">
                             Editar

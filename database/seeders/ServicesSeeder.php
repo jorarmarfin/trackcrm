@@ -27,7 +27,7 @@ class ServicesSeeder extends Seeder
                 'supplier_id' => 1,
             ],
             [
-                'name' => 'Portal con blog, multidioma',
+                'name' => 'Portal con blog, multi-idioma',
                 'description' => 'Desarrollada en wordpress, blog',
                 'price' => 6000.00,
                 'supplier_id' => 1,
@@ -78,25 +78,37 @@ class ServicesSeeder extends Seeder
                 'name' => '1 Instancia para envío de whatsapp',
                 'description' => 'Requiere dominio para envío',
                 'price' => 60.00,
-                'supplier_id' => 15,
+                'supplier_id' => 12,
             ],
             [
                 'name' => '5 Instancia para envío de whatsapp',
                 'description' => 'Requiere dominio para envío',
                 'price' => 180.00,
-                'supplier_id' => 16,
+                'supplier_id' => 13,
+            ],
+            [
+                'name' => '20 Instancia para envío de whatsapp',
+                'description' => 'Requiere dominio para envío',
+                'price' => 504.00,
+                'supplier_id' => 13,
+            ],
+            [
+                'name' => '30 Instancia para envío de whatsapp',
+                'description' => 'Requiere dominio para envío',
+                'price' => 672.00,
+                'supplier_id' => 14,
             ],
             [
                 'name' => 'Dominio',
                 'description' => 'Requiere dominio para envío',
                 'price' => 65.00,
-                'supplier_id' => 13,
+                'supplier_id' => 9,
             ],
             [
                 'name' => 'Dominio punto pe',
                 'description' => 'Requiere dominio para envío',
                 'price' => 150.00,
-                'supplier_id' => 21,
+                'supplier_id' => 11,
             ],
             [
                 'name' => 'Hosting básico',
@@ -130,103 +142,34 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'name' => 'SSL Simple',
-                'description' => 'Basico',
+                'description' => 'Básico',
                 'price' => 76.00,
-                'supplier_id' => 19,
+                'supplier_id' => 16,
             ],
             [
                 'name' => 'SSL Advance',
-                'description' => 'Basico',
+                'description' => 'Avanzado',
                 'price' => 160.00,
+                'supplier_id' => 17,
+            ],
+            [
+                'name' => 'Server VPS CPX11',
+                'description' => 'Finland',
+                'price' => 58.17,
+                'supplier_id' => 19,
+            ],
+            [
+                'name' => 'Server VPS cpx21',
+                'description' => 'US',
+                'price' => 80.00,
+                'supplier_id' => 28,
+            ],
+            [
+                'name' => 'Server VPS cx32',
+                'description' => 'Finland',
+                'price' => 69.00,
                 'supplier_id' => 20,
             ],
-            [
-                'name' => 'VPS Hosting CX22',
-                'description' => '2 vCPU | RAM 4 GB | SSD 40 GB | TRAFFIC 20 TB',
-                'price' => 55.82,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX11',
-                'description' => '2 vCPU | RAM 2 GB | SSD 40 GB | TRAFFIC 20 TB',
-                'price' => 58.17,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CX32',
-                'description' => '4 vCPU | RAM 8 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 68.46,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX21',
-                'description' => '3 vCPU | RAM 4 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 71.61,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX31',
-                'description' => '4 vCPU | RAM 8 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 97.02,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CX42',
-                'description' => '8 vCPU | RAM 16 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 108.78,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX41',
-                'description' => '8 vCPU | RAM 16 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 144.54,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CX52',
-                'description' => '16 vCPU | RAM 32 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 176.58,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX51',
-                'description' => '16 vCPU | RAM 32 GB | SSD 80 GB | TRAFFIC 20 TB',
-                'price' => 271.08,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX11',
-                'description' => '2 vCPU | RAM 2 GB | SSD 40 GB | TRAFFIC 1 TB',
-                'price' => 60.86,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX21',
-                'description' => '3 vCPU | RAM 4 GB | SSD 80 GB | TRAFFIC 2 TB',
-                'price' => 79.76,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX31',
-                'description' => '4 vCPU | RAM 8 GB | SSD 80 GB | TRAFFIC 3 TB',
-                'price' => 109.16,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX41',
-                'description' => '8 vCPU | RAM 16 GB | SSD 80 GB | TRAFFIC 4 TB',
-                'price' => 167.96,
-                'supplier_id' => 11,
-            ],
-            [
-                'name' => 'VPS Hosting CPX51',
-                'description' => '16 vCPU | RAM 32 GB | SSD 80 GB | TRAFFIC 5 TB',
-                'price' => 293.96,
-                'supplier_id' => 11,
-            ],
-
-
-
         ]);
     }
 }

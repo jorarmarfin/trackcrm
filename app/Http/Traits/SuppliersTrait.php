@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\Models\Setting;
 use App\Models\Supplier;
 
 trait SuppliersTrait
