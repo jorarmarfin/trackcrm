@@ -61,7 +61,7 @@ class WaveConnectedService
             'json' => [
                 'instance' => env('WAVECONNECTED_INSTANCE'),
                 'email' => env('WAVECONNECTED_USER_EMAIL'),
-                'phone' => '51'.$phone,
+                'phone' => $phone,
                 'message' => $message
             ]
         ]);

@@ -63,6 +63,12 @@ class InteractionsLive extends Component
         $this->isEdit = false;
         $this->iscreate = false;
     }
+    public function renewService($interaction_id):void
+    {
+        $interaction = $this->getInteraction($interaction_id);
+        $this->renewalInteractions($interaction);
+
+    }
     public function updatedFormServiceId($value)
     {
         $this->currentServiceId = $value;
@@ -79,7 +85,6 @@ class InteractionsLive extends Component
         $this->form->cost_price = ($service->supplier?->cost_price_to_soles ?? 0.00)*$quantity;
         $this->form->selling_price = ($service->price)*$quantity;
         $this->form->gross_profit = round($this->form->selling_price - $this->form->cost_price,2);
-
     }
 
 

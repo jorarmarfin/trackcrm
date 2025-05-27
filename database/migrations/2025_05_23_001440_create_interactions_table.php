@@ -38,6 +38,8 @@ return new class extends Migration
 
             // Observaciones
             $table->text('note')->nullable();
+            $table->boolean('resolved')->default(false);
+
 
             $table->timestamps();
         });

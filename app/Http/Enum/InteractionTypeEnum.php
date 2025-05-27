@@ -4,13 +4,13 @@ namespace App\Http\Enum;
 
 enum InteractionTypeEnum: string
 {
-    case START         = 'start'; // Start of service
-    case EXPIRATION    = 'expiration'; // Upcoming expiration
-    case PAYMENT       = 'payment'; // Pending payment
-    case RENEWAL       = 'renewal'; // Renewal
-    case REMINDER      = 'reminder'; // Reminder
-    case THANK_YOU     = 'thank_you'; // Thank you
-    case NOTE          = 'note'; // Internal note
+    case START         = 'start'; // inicia el servicio
+    case EXPIRATION    = 'expiration'; // Próxima expiración
+    case PAYMENT       = 'payment'; // Pago pendiente
+    case RENEWAL       = 'renewal'; // Renovación
+    case REMINDER      = 'reminder'; // Recordatorio
+    case THANK_YOU     = 'thank_you'; // Agradecimiento
+    case NOTE          = 'note'; // Nota interna
 
     public function label(): string
     {

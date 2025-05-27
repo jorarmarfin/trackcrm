@@ -3,11 +3,15 @@
 namespace App\Console\Commands;
 
 use App\Http\Traits\InteractionsTrait;
+use App\Http\Traits\WhatsappTrait;
+use App\Jobs\WhatsAppSendingJob;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class FollowUpCommand extends Command
 {
-    use InteractionsTrait;
+    use InteractionsTrait, WhatsappTrait;
+
     /**
      * The name and signature of the console command.
      *
@@ -28,6 +32,25 @@ class FollowUpCommand extends Command
     public function handle()
     {
         $expiringSoon = $this->getNextActionDate();
+        if ($expiringSoon->isEmpty()) {
+            $this->info('No follow-up actions found.');
+            return;
+        }
+        foreach ($expiringSoon as $interaction) {
+            $nextActionDate = Carbon::parse($interaction->next_action_date);
+            $expirationDate = Carbon::parse($interaction->expiration_date);
+            WhatsAppSendingJob::dispatch(
+                $interaction->id,
+                $interaction->type,
+                $interaction->client->name,
+                $interaction->service->name,
+                $interaction->expiration_date,
+                $interaction->selling_price,
+                $interaction->client->phone,
+                (int)$nextActionDate->diffInDays($expirationDate)
+            );
+        }
+
         $this->info('Follow-up command executed successfully! ');
     }
 }
