@@ -37,18 +37,25 @@ class FollowUpCommand extends Command
             return;
         }
         foreach ($expiringSoon as $interaction) {
-            $nextActionDate = Carbon::parse($interaction->next_action_date);
-            $expirationDate = Carbon::parse($interaction->expiration_date);
-            WhatsAppSendingJob::dispatch(
-                $interaction->id,
-                $interaction->type,
-                $interaction->client->name,
-                $interaction->service->name,
-                $interaction->expiration_date,
-                $interaction->selling_price,
-                $interaction->client->phone,
-                (int)$nextActionDate->diffInDays($expirationDate)
-            );
+
+            if($interaction->notify_by_email) {
+                echo 'Envío por email';
+            }
+
+            if($interaction->notify_by_whatsapp) {
+                $nextActionDate = Carbon::parse($interaction->next_action_date);
+                $expirationDate = Carbon::parse($interaction->expiration_date);
+                WhatsAppSendingJob::dispatch(
+                    $interaction->id,
+                    $interaction->type,
+                    $interaction->client->name,
+                    $interaction->service->name,
+                    $interaction->expiration_date,
+                    $interaction->selling_price,
+                    $interaction->client->phone,
+                    (int)$nextActionDate->diffInDays($expirationDate)
+                );
+            }
         }
 
         $this->info('Follow-up command executed successfully! ');
