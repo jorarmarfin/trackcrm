@@ -240,6 +240,7 @@
         <table>
             <thead>
             <tr>
+                <th>Acciones</th>
                 <th>Cliente</th>
                 <th>Servicio</th>
                 <th>Cantidad</th>
@@ -254,12 +255,25 @@
                 <th>Tipo</th>
                 <th>Notas</th>
                 <th>Resuelto</th>
-                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($interactions as $interaction)
                 <tr>
+                    <td>
+                        <button wire:click="editInteraction({{ $interaction->id }})" class="btn-secondary my-1">
+                            Editar
+                        </button>
+                        <button wire:click="$dispatch('alert-send-message',{{$interaction->id}})" class="btn-success my-1">
+                            Mensajes
+                        </button>
+                        <button wire:click="renewService({{ $interaction->id }})" class="btn-warning my-1">
+                            Renovar
+                        </button>
+                        <button @click="$dispatch('alert-delete',{{$interaction->id}})" class="btn-danger my-1">
+                            Eliminar
+                        </button>
+                    </td>
                     <td>{{ $interaction->client->name }}</td>
                     <td>{{ $interaction->service->name }}</td>
                     <td>{{ $interaction->quantity }}</td>
@@ -281,20 +295,7 @@
                     <td>{{ $interaction->note }}</td>
                     <td>{{ $interaction->resolved }}</td>
 
-                    <td>
-                        <button wire:click="editInteraction({{ $interaction->id }})" class="btn-secondary my-1">
-                            Editar
-                        </button>
-                        <button wire:click="$dispatch('alert-send-message',{{$interaction->id}})" class="btn-success my-1">
-                            Mensajes
-                        </button>
-                        <button wire:click="renewService({{ $interaction->id }})" class="btn-warning my-1">
-                            Renovar
-                        </button>
-                        <button @click="$dispatch('alert-delete',{{$interaction->id}})" class="btn-danger my-1">
-                            Eliminar
-                        </button>
-                    </td>
+
                 </tr>
             @endforeach
             </tbody>
