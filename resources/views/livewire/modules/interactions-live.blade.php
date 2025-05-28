@@ -284,6 +284,9 @@
                                     <a href="#" wire:click="renewService({{ $interaction->id }})" @click="open = false"
                                        class="block px-4 py-2 hover:bg-gray-100">Renovar</a>
 
+                                    <a href="#" wire:click="resolvedService({{ $interaction->id }})" @click="open = false"
+                                       class="block px-4 py-2 hover:bg-gray-100">Resolver</a>
+
                                     <hr class="my-1 border-gray-200">
 
                                     <a href="#" @click="$dispatch('alert-delete', {{ $interaction->id }})" @click="open = false"

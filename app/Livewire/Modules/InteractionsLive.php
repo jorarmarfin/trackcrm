@@ -129,6 +129,15 @@ class InteractionsLive extends Component
         );
 
     }
+    public function resolvedService($interaction_id):void
+    {
+        $this->updateInteractionFieldValue($interaction_id,['resolved' => true]);
+        $this->dispatch('alert', [
+            'title' => 'Interacción resuelta',
+            'icon' => 'success',
+            'message' => 'Interacción marcada como resuelta correctamente',
+        ]);
+    }
 
 
 }
