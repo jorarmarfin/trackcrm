@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Interaction;
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -50,7 +51,6 @@ class InteractionForm extends Form
     public function store()
     {
         $this->validate();
-
         Interaction::create(
             $this->only($this->fields)
         );

@@ -172,5 +172,18 @@
         {{ $slot }}
 
         @fluxScripts
+        @yield('scripts')
+        <script>
+            document.addEventListener('livewire:init', () => {
+                Livewire.on('alert', function (data) {
+                    Swal.fire({
+                        title: data[0].title,
+                        text: data[0].message,
+                        icon: data[0].icon,
+                        confirmButtonText: 'ok'
+                    })
+                });
+            });
+        </script>
     </body>
 </html>
