@@ -112,12 +112,12 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'name' => 'Hosting básico',
-                'description' => 'Requiere dominio para envío',
-                'price' => 150.00,
+                'description' => 'Sin Email corporativo',
+                'price' => 80.00,
                 'supplier_id' => 1,
             ],
             [
-                'name' => 'Dominio y Hosting',
+                'name' => 'Hosting Intermedio',
                 'description' => 'Requiere dominio para envío',
                 'price' => 150.00,
                 'supplier_id' => 1,
@@ -170,6 +170,7 @@ class ServicesSeeder extends Seeder
                 'price' => 69.00,
                 'supplier_id' => 20,
             ],
+
         ]);
     }
 }
