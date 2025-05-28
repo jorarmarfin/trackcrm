@@ -236,24 +236,20 @@
     @endif
 
 
-    <div class="table-container">
+    <div class="">
         <table>
             <thead>
             <tr>
                 <th>Acciones</th>
                 <th>Cliente</th>
                 <th>Servicio</th>
-                <th>Cantidad</th>
                 <th>Costo</th>
                 <th>Venta</th>
                 <th>Ganancia</th>
                 <th>Fecha de expiración</th>
                 <th>Fecha de siguiente acción</th>
                 <th>Notificado</th>
-                <th>Notificar por whatsapp</th>
-                <th>Notificar por email</th>
                 <th>Tipo</th>
-                <th>Notas</th>
                 <th>Resuelto</th>
             </tr>
             </thead>
@@ -261,38 +257,48 @@
             @foreach ($interactions as $interaction)
                 <tr>
                     <td>
-                        <button wire:click="editInteraction({{ $interaction->id }})" class="btn-secondary my-1">
-                            Editar
-                        </button>
-                        <button wire:click="$dispatch('alert-send-message',{{$interaction->id}})" class="btn-success my-1">
-                            Mensajes
-                        </button>
-                        <button wire:click="renewService({{ $interaction->id }})" class="btn-warning my-1">
-                            Renovar
-                        </button>
-                        <button @click="$dispatch('alert-delete',{{$interaction->id}})" class="btn-danger my-1">
-                            Eliminar
-                        </button>
+                        <div x-data="{ open: false }" class="relative inline-block text-left">
+                            <button @click="open = !open" type="button"
+                                    class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                    id="menu-button" aria-expanded="true" aria-haspopup="true">
+                                Acciones
+                                <svg class="-mr-1 ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M5 8l5 5 5-5" />
+                                </svg>
+                            </button>
+
+                            <div x-show="open" @click.outside="open = false"
+                                 class="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                <div class="py-1 text-sm text-gray-700">
+                                    <a href="#" wire:click="editInteraction({{ $interaction->id }})" @click="open = false"
+                                       class="block px-4 py-2 hover:bg-gray-100">Editar</a>
+
+                                    <a href="#" wire:click="$dispatch('alert-send-message', {{ $interaction->id }})" @click="open = false"
+                                       class="block px-4 py-2 hover:bg-gray-100">Mensajes</a>
+
+                                    <a href="#" wire:click="renewService({{ $interaction->id }})" @click="open = false"
+                                       class="block px-4 py-2 hover:bg-gray-100">Renovar</a>
+
+                                    <hr class="my-1 border-gray-200">
+
+                                    <a href="#" @click="$dispatch('alert-delete', {{ $interaction->id }})" @click="open = false"
+                                       class="block px-4 py-2 text-red-600 hover:bg-red-100">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
                     </td>
+
                     <td>{{ $interaction->client->name }}</td>
                     <td>{{ $interaction->service->name }}</td>
-                    <td>{{ $interaction->quantity }}</td>
                     <td>{{ $interaction->cost_price }}</td>
                     <td>{{ $interaction->selling_price }}</td>
                     <td>{{ $interaction->gross_profit }}</td>
                     <td>{{ $interaction->expiration_date }}</td>
                     <td>{{ $interaction->next_action_date }}</td>
                     <td>{{ $interaction->notified_at }}</td>
-                    <td>
-                        <input type="checkbox" disabled
-                               @if($interaction->notify_by_whatsapp) checked @endif>
-                    </td>
-                    <td>
-                        <input type="checkbox" disabled
-                               @if($interaction->notify_by_email) checked @endif>
-                    </td>
                     <td>{{ $interaction->type }}</td>
-                    <td>{{ $interaction->note }}</td>
                     <td>{{ $interaction->resolved }}</td>
 
 
