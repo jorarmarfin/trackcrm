@@ -43,6 +43,7 @@ class WhatsAppSendingJob implements ShouldQueue
         match($this->days) {
             5 => $this->sendFiveDaysNotification(),
             1 => $this->sendOneDayNotification(),
+            0 => $this->sendZeroDaysNotification(),
             default => null
         };
     }
@@ -74,6 +75,13 @@ class WhatsAppSendingJob implements ShouldQueue
     {
         $this->sendNotification(
             [$this, 'sendWhatsPreventiveToEndServiceTomorrow'],
+            ['notified_at' => now()]
+        );
+    }
+    public function sendZeroDaysNotification(): void
+    {
+        $this->sendNotification(
+            [$this, 'sendWhatsTodayEndService'],
             ['notified_at' => now()]
         );
     }

@@ -184,6 +184,20 @@
                 </div>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="period" class="form-label
+                @error('period') is-invalid @enderror">
+                    Periodo
+                </label>
+                <input type="text" class="form-text" id="period"
+                       wire:model="form.period" placeholder="Periodo" min="0" step="0.1">
+                @error('form.period')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
             <div class="form-group col-span-2">
                 <label for="note" class="form-label
                 @error('note') is-invalid @enderror">
@@ -271,6 +285,9 @@
                         <button wire:click="editInteraction({{ $interaction->id }})" class="btn-secondary my-1">
                             Editar
                         </button>
+                        <button wire:click="$dispatch('alert-send-message',{{$interaction->id}})" class="btn-success my-1">
+                            Mensajes
+                        </button>
                         <button wire:click="renewService({{ $interaction->id }})" class="btn-warning my-1">
                             Renovar
                         </button>
@@ -308,6 +325,45 @@
                 )
             }
         })
+    });
+
+    $wire.on('alert-send-message', (interaction_id) => {
+        Swal.fire({
+            title: 'Selecciona el mensaje a enviar',
+            input: 'select',
+            inputOptions: {
+                5: 'Recordatorio anticipado (5 días antes)',
+                1: 'Recordatorio de vencimiento (mañana vence)',
+                0: 'Último aviso (vence hoy)'
+            },
+            inputPlaceholder: 'Selecciona un tipo de mensaje',
+            showCancelButton: true,
+            confirmButtonText: 'Enviar mensaje',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes seleccionar un tipo de mensaje';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.sendInteractionMessage(interaction_id, result.value)
+                    .then(() => {
+                        Swal.fire(
+                            'Enviado!',
+                            'El mensaje ha sido enviado al cliente.',
+                            'success'
+                        )
+                    })
+                    .catch(() => {
+                        Swal.fire(
+                            'Error!',
+                            'Hubo un problema al enviar el mensaje.',
+                            'error'
+                        )
+                    });
+            }
+        });
     });
 </script>
 @endscript

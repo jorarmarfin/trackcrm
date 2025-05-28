@@ -30,6 +30,9 @@ class InteractionForm extends Form
     #[Validate('required')]
     public string $type = 'start'; // expiración, cobro, renovación, recordatorio, agradecimiento, nota
 
+    #[Validate('required')]
+    public string $period = 'monthly'; // monthly, quarterly, yearly
+
     public string $note = '';
 
     public array $fields = [
@@ -45,6 +48,7 @@ class InteractionForm extends Form
         'notify_by_whatsapp',
         'notify_by_email',
         'type',
+        'period',
         'note'
     ];
 
@@ -71,6 +75,7 @@ class InteractionForm extends Form
             'notify_by_whatsapp' => $interaction->notify_by_whatsapp,
             'notify_by_email' => $interaction->notify_by_email,
             'type' => $interaction->type,
+            'period' => $interaction->period,
             'note' => $interaction->note
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Livewire\Modules;
 use App\Http\Traits\InteractionsTrait;
 use App\Http\Traits\DdlTrait;
 use App\Http\Traits\ServicesTrait;
+use App\Jobs\WhatsAppSendingJob;
 use App\Livewire\Forms\InteractionForm;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -85,6 +86,29 @@ class InteractionsLive extends Component
         $this->form->cost_price = ($service->supplier?->cost_price_to_soles ?? 0.00)*$quantity;
         $this->form->selling_price = ($service->price)*$quantity;
         $this->form->gross_profit = round($this->form->selling_price - $this->form->cost_price,2);
+    }
+    public function sendInteractionMessage($interaction_id,$message_id):void
+    {
+        $interaction = $this->getInteraction($interaction_id);
+        if(!$interaction->client->phone){
+            $this->dispatch('alert', [
+                'title' => 'Error',
+                'icon' => 'error',
+                'message' => 'El cliente no tiene un número de teléfono registrado',
+            ]);
+            return;
+        }
+        WhatsAppSendingJob::dispatch(
+            $interaction->id,
+            $interaction->type,
+            $interaction->client->name,
+            $interaction->service->name,
+            $interaction->expiration_date,
+            $interaction->selling_price,
+            $interaction->client->phone,
+            (int)$message_id
+        );
+
     }
 
 
