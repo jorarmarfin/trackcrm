@@ -65,6 +65,10 @@ select:focus[data-flux-control] {
     @apply size-4;
 } */
 
+html, body {
+    height: 100%;
+}
+
 
 .title-page {
     @apply text-3xl font-bold
