@@ -48,6 +48,25 @@ class InteractionsLive extends Component
             'message' => $message,
         ]);
     }
+    public function showInteraction($interaction_id):void
+    {
+        $interaction = $this->getInteraction($interaction_id);
+        $this->isEdit = false;
+        $this->iscreate = false;
+        $this->dispatch('alert-show-details',[
+            'client' => $interaction->client->name ,
+            'service' => $interaction->service ,
+            'quantity' => $interaction->quantity,
+            'cost_price' => $interaction->cost_price,
+            'selling_price' => $interaction->selling_price,
+            'gross_profit' => $interaction->gross_profit,
+            'expiration_date' => $interaction->expiration_date,
+            'next_action_date' => $interaction->next_action_date,
+            'type' => $interaction->type,
+            'period' => $interaction->period,
+            'note' => $interaction->note,
+        ]);
+    }
     public function editInteraction($interaction_id):void
     {
         $this->form->show($this->getInteraction($interaction_id));

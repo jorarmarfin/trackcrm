@@ -272,6 +272,9 @@
                             <div x-show="open" @click.outside="open = false"
                                  class="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                                 <div class="py-1 text-sm text-gray-700">
+                                    <a href="#" wire:click="showInteraction({{ $interaction->id }})" @click="open = false"
+                                       class="block px-4 py-2 hover:bg-gray-100">Ver</a>
+
                                     <a href="#" wire:click="editInteraction({{ $interaction->id }})" @click="open = false"
                                        class="block px-4 py-2 hover:bg-gray-100">Editar</a>
 
@@ -372,5 +375,31 @@
             }
         });
     });
+    $wire.on('alert-show-details', (res) => {
+        // Llamamos a Livewire para obtener los datos
+        let data = res[0];
+        Swal.fire({
+            title: 'Detalle de la interacción',
+            html: `
+                <div style="text-align: left">
+                    <strong>Cliente:</strong> ${data.client}<br>
+                    <strong>Servicio:</strong> ${data.service.name}<br>
+                    <strong>Cantidad:</strong> ${data.quantity}<br>
+                    <strong>Costo:</strong> ${data.cost_price}<br>
+                    <strong>Venta:</strong> ${data.selling_price}<br>
+                    <strong>Ganancia:</strong> ${data.gross_profit}<br>
+                    <strong>Expira:</strong> ${data.expiration_date}<br>
+                    <strong>Siguiente acción:</strong> ${data.next_action_date}<br>
+                    <strong>Tipo:</strong> ${data.type}<br>
+                    <strong>Periodo:</strong> ${data.period}<br>
+                    <strong>Nota:</strong> ${data.note}<br>
+                </div>
+            `,
+            confirmButtonText: 'Cerrar',
+            width: 600
+        });
+    });
+
+
 </script>
 @endscript
