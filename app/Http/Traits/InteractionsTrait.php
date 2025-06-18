@@ -9,7 +9,7 @@ trait InteractionsTrait
 {
     public function getInteractions()
     {
-        return Interaction::query();
+        return Interaction::orderBy('id','desc');
     }
     public function getInteraction($interaction_id)
     {
@@ -21,7 +21,7 @@ trait InteractionsTrait
             ->where('resolved', false)
             ->get();
     }
-    public function renewalInteractions($originalInteraction)
+    public function renewalInteractions($originalInteraction):void
     {
         $newInteraction = new Interaction();
         $newInteraction->client_id = $originalInteraction->client_id;
@@ -41,9 +41,16 @@ trait InteractionsTrait
         $originalInteraction->save();
 
     }
-    public function updateInteractionFieldValue($id,$array)
+    public function updateInteractionFieldValue($id,$array):void
     {
         Interaction::where('id',$id)->update($array);
+    }
+    public function getInteractionsToBeCompleted()
+    {
+        return Interaction::where('resolved', false)
+            ->orderBy('next_action_date', 'asc')
+            ->take(5)
+            ->get();
     }
 
 }

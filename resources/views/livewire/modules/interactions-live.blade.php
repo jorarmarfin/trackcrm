@@ -248,7 +248,7 @@
                 <th>Ganancia</th>
                 <th>Fecha de expiración</th>
                 <th>Fecha de siguiente acción</th>
-                <th>Notificado</th>
+                <th>Periodo</th>
                 <th>Tipo</th>
                 <th>Resuelto</th>
             </tr>
@@ -303,7 +303,7 @@
                     <td>{{ $interaction->gross_profit }}</td>
                     <td>{{ $interaction->expiration_date }}</td>
                     <td>{{ $interaction->next_action_date }}</td>
-                    <td>{{ $interaction->notified_at }}</td>
+                    <td>{{ $interaction->period }}</td>
                     <td>{{ $interaction->type }}</td>
                     <td>{{ $interaction->resolved }}</td>
 
