@@ -18,6 +18,8 @@
                         <span class="text-sm text-neutral-900 dark:text-neutral-100">{{ $interaction->service->name }}</span>
                         <br>
                         <span class="text-xs text-neutral-500 dark:text-neutral-400">{{ $interaction->client->name }}</span>
+                        |
+                        <span class="text-xs text-neutral-500 dark:text-neutral-400">{{ $interaction->expiration_date }}</span>
                     </div>
                     <span class="text-xs text-neutral-500 dark:text-neutral-400">{{ $interaction->next_action_date }}</span>
                 </li>
