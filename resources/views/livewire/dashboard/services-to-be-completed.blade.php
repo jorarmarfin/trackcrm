@@ -1,4 +1,4 @@
-<div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 p-4">
+<div class="relative aspect-video  rounded-xl border border-neutral-200 dark:border-neutral-700 p-4">
     <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             Servicios próximos a vencer
