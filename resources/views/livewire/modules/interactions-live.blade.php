@@ -234,9 +234,7 @@
             </button>
         </div>
     @endif
-
-
-    <div class="">
+    <div class="table-container">
         <table>
             <thead>
             <tr>
@@ -257,21 +255,23 @@
             @foreach ($interactions as $interaction)
                 <tr>
                     <td>
-                        <div x-data="{ open: false }" class="relative inline-block text-left">
+                        <div x-data="{ open: false }" class="relative inline-block text-left" x-cloak>
                             <button @click="open = !open" type="button"
-                                    class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                    class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 z-40"
                                     id="menu-button" aria-expanded="true" aria-haspopup="true">
                                 Acciones
                                 <svg class="-mr-1 ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"
                                      stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M5 8l5 5 5-5" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8l5 5 5-5" />
                                 </svg>
                             </button>
 
-                            <div x-show="open" @click.outside="open = false"
-                                 class="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                                <div class="py-1 text-sm text-gray-700">
+                            <div x-show="open"
+                                 @click.outside="open = false"
+                                 x-transition
+                                 class="absolute z-50 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 left-0">
+
+                            <div class="py-1 text-sm text-gray-700">
                                     <a href="#" wire:click="showInteraction({{ $interaction->id }})" @click="open = false"
                                        class="block px-4 py-2 hover:bg-gray-100">Ver</a>
 
@@ -289,11 +289,12 @@
 
                                     <hr class="my-1 border-gray-200">
 
-                                    <a href="#" @click="$dispatch('alert-delete', {{ $interaction->id }})" @click="open = false"
+                                    <a href="#" @click="open = false; $dispatch('alert-delete', {{ $interaction->id }})"
                                        class="block px-4 py-2 text-red-600 hover:bg-red-100">Eliminar</a>
                                 </div>
                             </div>
                         </div>
+
                     </td>
 
                     <td>{{ $interaction->client->name }}</td>

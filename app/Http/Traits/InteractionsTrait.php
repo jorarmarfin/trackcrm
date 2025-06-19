@@ -9,7 +9,7 @@ trait InteractionsTrait
 {
     public function getInteractions()
     {
-        return Interaction::orderBy('id','desc');
+        return Interaction::orderBy('expiration_date','asc');
     }
     public function getInteraction($interaction_id)
     {

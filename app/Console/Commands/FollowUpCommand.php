@@ -39,9 +39,8 @@ class FollowUpCommand extends Command
         foreach ($expiringSoon as $interaction) {
 
             if($interaction->notify_by_email) {
-                echo 'Envío por email';
+                echo 'Envío por email '."\n";
             }
-
             if($interaction->notify_by_whatsapp) {
                 $nextActionDate = Carbon::parse($interaction->next_action_date);
                 $expirationDate = Carbon::parse($interaction->expiration_date);
