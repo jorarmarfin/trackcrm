@@ -19,10 +19,11 @@ class InteractionsLive extends Component
     public bool $isEdit = false;
     public bool $iscreate = false;
     public int $interaction_id;
+    public bool $resolved = false;
     public function render()
     {
         return view('livewire.modules.interactions-live',[
-            'interactions' => $this->getInteractions()->paginate(50),
+            'interactions' => $this->getInteractions($this->resolved)->paginate(50),
             'ddl_clients' => $this->ddlClients(),
             'ddl_services' => $this->ddlServices(),
             'ddl_interaction_types' => $this->ddlInteractionTypes(),

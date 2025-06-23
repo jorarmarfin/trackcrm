@@ -7,9 +7,15 @@ use App\Models\Interaction;
 
 trait InteractionsTrait
 {
-    public function getInteractions()
+    public function getInteractions($resolved = false)
     {
-        return Interaction::orderBy('expiration_date','asc');
+        $interactions = Interaction::orderBy('expiration_date','asc');
+        if ($resolved) {
+            $interactions->where('resolved', true);
+        } else {
+            $interactions->where('resolved', false);
+        }
+        return $interactions;
     }
     public function getInteraction($interaction_id)
     {

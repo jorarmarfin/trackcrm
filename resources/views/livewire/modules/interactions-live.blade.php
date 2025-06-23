@@ -229,9 +229,14 @@
     @else
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold"></h2>
-            <button wire:click="$set('iscreate', '1')" class="btn-primary">
-                Crear nueva interacción
-            </button>
+            <div>
+                <button wire:click="$set('resolved', '1')" class="btn-secondary">
+                    Ver resueltos
+                </button>
+                <button wire:click="$set('iscreate', '1')" class="btn-primary">
+                    Crear nueva interacción
+                </button>
+            </div>
         </div>
     @endif
     <div class="table-container">
