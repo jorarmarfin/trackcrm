@@ -61,7 +61,6 @@ class ClientForm extends Form
     public function update(Client $client): void
     {
         $this->validate();
-
         $client->update(
             $this->only($this->fields)
         );

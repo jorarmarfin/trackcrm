@@ -13,7 +13,7 @@ class Client extends Model
     public function phone(): Attribute
     {
         return Attribute::make(
-            set: fn($value) => preg_replace('/[^0-9]/', '', ltrim($value, '+51'))
+            set: fn($value) => preg_replace('/[^0-9]/', '', $value)
         );
     }
 
