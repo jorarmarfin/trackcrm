@@ -19,6 +19,10 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('logs');
+
 require __DIR__.'/auth.php';
 require __DIR__.'/modules.php';
 require __DIR__.'/admin.php';

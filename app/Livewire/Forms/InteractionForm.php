@@ -33,7 +33,7 @@ class InteractionForm extends Form
     #[Validate('required')]
     public string $period = 'monthly'; // monthly, quarterly, yearly
 
-    public string $note = '';
+    public ?string $note = '';
 
     public array $fields = [
         'client_id',
