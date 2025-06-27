@@ -64,7 +64,7 @@
             <flux:spacer />
 
             <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="{{route('logs')}}">
+                <flux:navlist.item icon="folder-git-2" href="{{route('logs')}}" target="_blank">
                 {{ __('Logs') }}
                 </flux:navlist.item>
 
