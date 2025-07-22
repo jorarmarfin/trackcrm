@@ -60,6 +60,8 @@ class FollowUpCommand extends Command
                 $expirationDate = Carbon::parse($interaction->expiration_date);
                 $diasRestantes = (int)$nextActionDate->diffInDays($expirationDate);
 
+                $this->line(' - Días restantes: ' . $diasRestantes);
+
                 if ($this->output->isVerbose()) {
                     $this->line(' - Encolando WhatsApp para: ' . $interaction->client->name . ' - Servicio: ' . $interaction->service->name);
                 }
