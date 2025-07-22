@@ -24,26 +24,46 @@ class FollowUpCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Envía notificaciones de seguimiento para interacciones que vencen pronto';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
+        $this->info('Iniciando proceso de seguimiento de interacciones...');
+
         $expiringSoon = $this->getNextActionDate();
         if ($expiringSoon->isEmpty()) {
-            $this->info('No follow-up actions found.');
+            $this->info('No se encontraron acciones de seguimiento pendientes.');
             return;
         }
-        foreach ($expiringSoon as $interaction) {
 
+        $this->info('Se encontraron ' . $expiringSoon->count() . ' interacciones que requieren seguimiento.');
+
+        $emailCount = 0;
+        $whatsappCount = 0;
+
+        $this->output->progressStart($expiringSoon->count());
+
+        foreach ($expiringSoon as $interaction) {
             if($interaction->notify_by_email) {
-                echo 'Envío por email '."\n";
+                $emailCount++;
+                if ($this->output->isVerbose()) {
+                    $this->line(' - Encolando email para: ' . $interaction->client->name . ' - Servicio: ' . $interaction->service->name);
+                }
             }
+
             if($interaction->notify_by_whatsapp) {
+                $whatsappCount++;
                 $nextActionDate = Carbon::parse($interaction->next_action_date);
                 $expirationDate = Carbon::parse($interaction->expiration_date);
+                $diasRestantes = (int)$nextActionDate->diffInDays($expirationDate);
+
+                if ($this->output->isVerbose()) {
+                    $this->line(' - Encolando WhatsApp para: ' . $interaction->client->name . ' - Servicio: ' . $interaction->service->name);
+                }
+
                 WhatsAppSendingJob::dispatch(
                     $interaction->id,
                     $interaction->type,
@@ -52,11 +72,20 @@ class FollowUpCommand extends Command
                     $interaction->expiration_date,
                     $interaction->selling_price,
                     $interaction->client->phone,
-                    (int)$nextActionDate->diffInDays($expirationDate)
+                    $diasRestantes
                 );
             }
+
+            $this->output->progressAdvance();
         }
 
-        $this->info('Follow-up command executed successfully! ');
+        $this->output->progressFinish();
+
+        $this->newLine();
+        $this->info('Resumen de la ejecución:');
+        $this->info('✓ Interacciones procesadas: ' . $expiringSoon->count());
+        $this->info('✓ Notificaciones por email: ' . $emailCount);
+        $this->info('✓ Notificaciones por WhatsApp: ' . $whatsappCount);
+        $this->info('Comando ejecutado correctamente.');
     }
 }
